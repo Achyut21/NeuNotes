@@ -7,12 +7,25 @@ const Navbar = () => {
   const { user, logout } = useAuthStore();
   const [open, setOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchExpanded, setSearchExpanded] = useState(false);
   const dropdownRef = useRef(null);
+  const searchRef = useRef(null);
   const navigate = useNavigate();
 
   // Toggle dropdown when profile icon is clicked
   const handleProfileClick = () => {
     setOpen((prev) => !prev);
+  };
+
+  // Toggle search expansion
+  const toggleSearch = () => {
+    setSearchExpanded((prev) => !prev);
+    // Focus the input after expanding
+    if (!searchExpanded) {
+      setTimeout(() => {
+        searchRef.current?.focus();
+      }, 100);
+    }
   };
 
   // Close dropdown if clicking outside of it
@@ -21,13 +34,19 @@ const Navbar = () => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpen(false);
       }
+      
+      // Close search if clicking outside and it's expanded
+      if (searchExpanded && searchRef.current && !searchRef.current.contains(event.target) && 
+          !event.target.classList.contains('search-toggle')) {
+        setSearchExpanded(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [searchExpanded]);
 
   // Sign out and redirect to login page
   const handleSignOut = async () => {
@@ -41,7 +60,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 bg-primary">
             <Link to="/" className="text-2xl font-bold text-primary hover:text-accent transition-colors">
               NeuNotes
             </Link>
@@ -71,17 +90,32 @@ const Navbar = () => {
 
           {/* Desktop menu */}
           <div className="hidden md:flex md:flex-1 md:items-center md:justify-center">
-            <div className="relative w-full max-w-lg">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-              </div>
-              <input
-                type="text"
-                placeholder="Search subjects, notes..."
-                className="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-gray-50"
-              />
+            <div className="relative w-full max-w-lg transition-all duration-300 ease-in-out">
+              {searchExpanded ? (
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </div>
+              ) : null}
+              
+              {searchExpanded ? (
+                <input
+                  ref={searchRef}
+                  type="text"
+                  placeholder="Search subjects, notes..."
+                  className="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-gray-50 animate-fadeIn"
+                />
+              ) : (
+                <button 
+                  onClick={toggleSearch}
+                  className="search-toggle ml-auto flex items-center justify-center p-2 rounded-full hover:bg-gray-100 focus:outline-none transition-colors"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
 

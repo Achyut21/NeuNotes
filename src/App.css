@@ -1,1 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @import "tailwindcss";
+
+:root {
+    --primary: #ff3a3a;
+    --secondary: #212121;
+    --background: #f8f8f8;
+    --text: #333333;
+    --text-light: #666666;
+    --accent: #ff6b6b;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background-color: var(--background);
+  }
+  
+  /* Login page specific styles - we'll update this for point #6 */
+  body.login-page {
+    background-color: white;
+  }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Animation classes */
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Improved button styles */
+.btn {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition-property: color, background-color;
+}
+
+.div{
+    --primary: #ff3a3a;
+    --secondary: #212121;
+    --background: #f8f8f8;
+    --text: #333333;
+    --text-light: #666666;
+    --accent: #ff6b6b;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: var(--accent);
+}
+
+.btn-secondary {
+  background-color: #f3f4f6;
+  color: var(--text);
+}
+.btn-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* For the expanded search animation */
+@keyframes expandSearch {
+    from {
+      width: 48px;
+      opacity: 0;
+    }
+    to {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+  
+  .search-expand {
+    animation: expandSearch 0.3s ease-out forwards;
+  }
+  
+  /* For the login page gradient background */
+  .login-gradient {
+    background-image: linear-gradient(to right, rgba(255, 58, 58, 0.1), rgba(33, 33, 33, 0.8));
+  }
+  
