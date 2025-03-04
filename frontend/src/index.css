@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+
+:root {
+    --primary: #ff3a3a;
+    --secondary: #212121;
+    --background: #f8f8f8;
+    --text: #333333;
+    --text-light: #666666;
+    --accent: #ff6b6b;
+  }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background-color: var(--background);
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Utility classes for background colors */
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-background {
+  background-color: var(--background);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+/* Utility classes for text colors */
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text {
+  color: var(--text);
+}
+
+.text-light {
+  color: var(--text-light);
+}
+
+/* Utility classes for border colors */
+.border-primary {
+  border-color: var(--primary);
+}
+
+.border-secondary {
+  border-color: var(--secondary);
+}
+
+/* Example Button Styles */
+.btn {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s, color 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+}
+
+.btn-secondary {
+  background-color: #f3f4f6;
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Search expand animation */
+@keyframes expandSearch {
+  from {
+    width: 48px;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.search-expand {
+  animation: expandSearch 0.3s ease-out forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Login page specific styles */
+body.login-page {
+  background-color: white;
+}
+
+.login-gradient {
+  background-image: linear-gradient(to right, rgba(255, 58, 58, 0.1), rgba(33, 33, 33, 0.8));
+}

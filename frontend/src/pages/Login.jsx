@@ -23,7 +23,7 @@ const Login = () => {
           <div className="h-full w-full bg-[url('https://www.skyweaver.net/images/media/wallpapers/wallpaper1.jpg')] bg-cover bg-center" />
         </div>
         <div className="relative z-20 max-w-md p-8 text-white text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">NeuNotes</h1>
+          <h1 className="text-4xl text-{primary} md:text-5xl font-bold mb-4">NeuNotes</h1>
           <p className="text-xl text-white/90 mb-6">Your Academic Knowledge Hub</p>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -68,7 +68,7 @@ const Login = () => {
           <div className="bg-white rounded-lg shadow-lg p-8">
             <div className="text-center mb-6 hidden md:block">
               <h3 className="text-2xl font-bold text-gray-800">Welcome back</h3>
-              <p className="text-gray-600 mt-1">Sign in to continue to NeuNotes</p>
+              <p className=" md:text-gray-600 mt-1">Sign in to continue to NeuNotes</p>
             </div>
             
             <div className="space-y-6">
@@ -107,7 +107,7 @@ const Login = () => {
             </div>
           </div>
           
-          <p className="mt-8 text-center text-sm text-gray-500 md:text-gray-500">
+          <p className="mt-8 text-center text-sm text-white md:text-gray-500">
             By signing in, you agree to NeuNotes&apos;{' '}
             <a href="#" className="font-medium text-primary hover:text-accent">
               Terms of Service

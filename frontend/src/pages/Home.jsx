@@ -2,10 +2,12 @@ import { useState } from "react";
 import subjects from "../constants/subjects";
 import SubjectCard from "../components/SubjectCards";
 import useAuthStore from "../contexts/authStore";
+import UploadNoteModal from "../components/uploadNoteModal";
 
 const Home = () => {
   const { user } = useAuthStore();
   const [activeTab, setActiveTab] = useState("all");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Simulated recent subjects (in a real app, these would come from user data)
   const recentSubjects = subjects.slice(0, 2);
@@ -23,7 +25,10 @@ const Home = () => {
               Continue your learning journey with NeuNotes. Access quality notes and study materials.
             </p>
             <div className="flex flex-wrap gap-3">
-              <button className="btn btn-primary px-6 py-2 rounded-lg font-medium transition-colors">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="btn btn-primary px-6 py-2 rounded-lg font-medium transition-colors"
+              >
                 Create New Note
               </button>
               <button className="bg-white/10 hover:bg-white/20 text-black px-6 py-2 rounded-lg font-medium transition-colors">
@@ -38,38 +43,37 @@ const Home = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Tab Navigation */}
         <div className="flex border-b border-gray-200 mb-8">
-  <button
-    className={`px-4 py-2 font-medium text-sm transition-colors border-b-2 ${
-      activeTab === "all"
-        ? "border-primary text-primary"
-        : "border-transparent text-text-light hover:text-text hover:border-gray-300"
-    }`}
-    onClick={() => setActiveTab("all")}
-  >
-    All Subjects
-  </button>
-  <button
-    className={`px-4 py-2 font-medium text-sm transition-colors border-b-2 ${
-      activeTab === "recent"
-        ? "border-primary text-primary"
-        : "border-transparent text-text-light hover:text-text hover:border-gray-300"
-    }`}
-    onClick={() => setActiveTab("recent")}
-  >
-    Recent
-  </button>
-  <button
-    className={`px-4 py-2 font-medium text-sm transition-colors border-b-2 ${
-      activeTab === "popular"
-        ? "border-primary text-primary"
-        : "border-transparent text-text-light hover:text-text hover:border-gray-300"
-    }`}
-    onClick={() => setActiveTab("popular")}
-  >
-    Popular
-  </button>
-</div>
-
+          <button
+            className={`px-4 py-2 font-medium text-sm transition-colors border-b-2 ${
+              activeTab === "all"
+                ? "border-primary text-primary"
+                : "border-transparent text-text-light hover:text-text hover:border-gray-300"
+            }`}
+            onClick={() => setActiveTab("all")}
+          >
+            All Subjects
+          </button>
+          <button
+            className={`px-4 py-2 font-medium text-sm transition-colors border-b-2 ${
+              activeTab === "recent"
+                ? "border-primary text-primary"
+                : "border-transparent text-text-light hover:text-text hover:border-gray-300"
+            }`}
+            onClick={() => setActiveTab("recent")}
+          >
+            Recent
+          </button>
+          <button
+            className={`px-4 py-2 font-medium text-sm transition-colors border-b-2 ${
+              activeTab === "popular"
+                ? "border-primary text-primary"
+                : "border-transparent text-text-light hover:text-text hover:border-gray-300"
+            }`}
+            onClick={() => setActiveTab("popular")}
+          >
+            Popular
+          </button>
+        </div>
 
         {/* Stats Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -98,6 +102,12 @@ const Home = () => {
           ))}
         </div>
       </div>
+
+      {/* Upload Note Modal */}
+      <UploadNoteModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 };
