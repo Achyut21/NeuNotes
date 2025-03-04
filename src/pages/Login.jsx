@@ -94,7 +94,7 @@ const Login = () => {
               <button
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
               >
-                Login with Email
+                Login with Gamil
               </button>
 
               <div className="flex items-center justify-center">

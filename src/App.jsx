@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect } from "react";
 import useAuthStore from "./contexts/authStore";
-
+import './index.css';
 
 const AppContent = () => {
   const location = useLocation();
