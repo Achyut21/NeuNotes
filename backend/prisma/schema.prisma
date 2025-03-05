@@ -41,23 +41,22 @@ model Enrollment {
 }
 
 model Upload {
-  id          Int      @id @default(autoincrement())
-  subcategoryId Int?
-  uploadedBy  Int      // references a user id
-  uploadedAt  DateTime @default(now())
-  fileMetadata FileMetadata?
+  id            Int           @id @default(autoincrement())
+  uploadedBy    String        // Changed from Int to String
+  subcategoryId Int?          // Optional if needed
+  uploadedAt    DateTime      @default(now())
+  fileMetadata  FileMetadata? // One-to-one relation
 }
 
 model FileMetadata {
-  id         Int    @id @default(autoincrement())
-  uploadId   Int    @unique
-  fileName   String
-  fileType   String
-  fileSize   Int
-  fileUrl    String // This stores the external URL
+  id          Int     @id @default(autoincrement())
+  uploadId    Int     @unique
+  fileName    String
+  fileType    String
+  fileSize    Int
+  fileUrl     String
   description String?
-  
-  upload     Upload @relation(fields: [uploadId], references: [id])
+  upload      Upload  @relation(fields: [uploadId], references: [id])
 }
 
 model Activity {
