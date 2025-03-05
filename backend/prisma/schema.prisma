@@ -23,3 +23,44 @@ model Category {
   createdBy  Int      // This will reference a user id (faculty)
   createdAt  DateTime @default(now())
 }
+
+model Enrollment {
+  id         Int      @id @default(autoincrement())
+  studentId  Int
+  categoryId Int
+  enrolledAt DateTime @default(now())
+
+  @@unique([studentId, categoryId])
+}
+
+model Upload {
+  id          Int      @id @default(autoincrement())
+  subcategoryId Int?
+  uploadedBy  Int      // references a user id
+  uploadedAt  DateTime @default(now())
+  fileMetadata FileMetadata?
+}
+
+model FileMetadata {
+  id         Int    @id @default(autoincrement())
+  uploadId   Int    @unique
+  fileName   String
+  fileType   String
+  fileSize   Int
+  fileUrl    String // This stores the external URL
+  description String?
+  
+  upload     Upload @relation(fields: [uploadId], references: [id])
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  uploadId   Int
+  userId     Int
+  content    String
+  createdAt  DateTime @default(now())
+
+  // In a real schema, you’d add relations to Upload and User
+}
+
+
