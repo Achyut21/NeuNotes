@@ -24,6 +24,13 @@ model Category {
   createdAt  DateTime @default(now())
 }
 
+model Subcategory {
+  subcat_id   Int      @id @default(autoincrement())
+  category_id Int
+  title       String
+  created_at  DateTime @default(now())
+}
+
 model Enrollment {
   id         Int      @id @default(autoincrement())
   studentId  Int
@@ -53,6 +60,13 @@ model FileMetadata {
   upload     Upload @relation(fields: [uploadId], references: [id])
 }
 
+model Activity {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  action    String
+  timestamp DateTime @default(now())
+}
+
 model Comment {
   id         Int      @id @default(autoincrement())
   uploadId   Int
@@ -62,5 +76,3 @@ model Comment {
 
   // In a real schema, you’d add relations to Upload and User
 }
-
-
