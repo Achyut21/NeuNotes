@@ -1,12 +1,10 @@
-// src/context/authStore.js
+// src/contexts/authStore.js
 import { create } from "zustand";
 import { auth, provider } from "../firebase";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 
 const useAuthStore = create((set) => {
-  // Subscribe to Firebase auth state changes
   onAuthStateChanged(auth, (user) => {
-    // When Firebase updates the user, update our store
     set({ user: user || null });
   });
 

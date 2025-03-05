@@ -1,16 +1,15 @@
+// src/pages/Home.jsx
 import { useState } from "react";
-import subjects from "../constants/subjects";
+import subjects from "../constants/subjects"; // Later replace with API data
 import SubjectCard from "../components/SubjectCards";
 import useAuthStore from "../contexts/authStore";
-import UploadNoteModal from "../components/uploadNoteModal";
+import UploadNoteModal from "../components/UploadNoteModal";
 
 const Home = () => {
   const { user } = useAuthStore();
   const [activeTab, setActiveTab] = useState("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Simulated recent subjects (in a real app, these would come from user data)
-  const recentSubjects = subjects.slice(0, 2);
+  const recentSubjects = subjects.slice(0, 2); // Later replace with dynamic data
 
   return (
     <div className="bg-background min-h-screen pb-12">
@@ -92,8 +91,7 @@ const Home = () => {
         </div>
 
         <h2 className="text-2xl font-bold text-text mb-6">
-          {activeTab === "all" ? "Explore Subjects" : 
-           activeTab === "recent" ? "Recently Viewed" : "Popular Subjects"}
+          {activeTab === "all" ? "Explore Subjects" : activeTab === "recent" ? "Recently Viewed" : "Popular Subjects"}
         </h2>
 
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

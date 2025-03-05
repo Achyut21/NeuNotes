@@ -2,9 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  apiKey: "AIzaSyC8gGYhg_-1TSBIlPJCxyCWcPWBBRs0EMU",
+  authDomain: "neunotes-21.firebaseapp.com",
+  projectId: "neunotes-21",
+  storageBucket: "neunotes-21.firebasestorage.app",
+  messagingSenderId: "1012336637127",
+  appId: "1:1012336637127:web:d08541c4fab1404e27bae2"
 };
 
 // Initialize Firebase app and auth
