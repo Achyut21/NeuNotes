@@ -20,22 +20,19 @@ if (!admin.apps.length) {
  * Middleware to verify Firebase ID tokens from the client.
  * Expects an Authorization header with the format: "Bearer <token>"
  */
-export async function verifyAuth(req, res, next) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.split(" ")[1]; // e.g. "Bearer <token>"
-
-  if (!token) {
-    return res.status(401).json({ error: "No token provided" });
-  }
-
-  try {
-    // Verify the token using Firebase Admin
-    const decodedToken = await admin.auth().verifyIdToken(token);
-    // Attach user info (e.g., uid, email) to the request
-    req.user = decodedToken;
-    next();
-  } catch (error) {
-    console.error("Token verification failed:", error);
-    return res.status(401).json({ error: "Invalid token" });
-  }
-}
+export const verifyAuth = async (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    console.log("verifyAuth received header:", authHeader);
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ error: "Unauthorized: No token provided" });
+    }
+    const token = authHeader.split(" ")[1];
+    try {
+      const decodedToken = await admin.auth().verifyIdToken(token);
+      req.user = decodedToken;
+      next();
+    } catch (error) {
+      console.error("Token verification error:", error);
+      return res.status(401).json({ error: "Unauthorized: Invalid token" });
+    }
+  };

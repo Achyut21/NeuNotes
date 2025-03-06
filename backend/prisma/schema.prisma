@@ -9,11 +9,17 @@ generator client {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String?
-  // Additional fields can be added as needed
-  // Relationships to categories can be added later (if needed)
+  id       String   @id @default(uuid()) // Using UUIDs or string for Firebase UIDs
+  email    String   @unique
+  name     String?
+  role     Role     @default(STUDENT) // Default role is STUDENT
+  // Other fields…
+}
+
+enum Role {
+  ADMIN
+  FACULTY
+  STUDENT
 }
 
 model Category {
