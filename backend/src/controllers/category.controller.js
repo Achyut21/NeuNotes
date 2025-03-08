@@ -8,19 +8,22 @@ const prisma = new PrismaClient();
  * In a real app, you’d also check the role (faculty) from req.user.
  */
 export const createCategory = async (req, res) => {
-  const { name, description } = req.body;
-  // For now, we assume req.user.uid represents a faculty ID.
-  const facultyId = req.user.uid;
+  const { name, image } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ error: "Category name is required" });
+  }
 
   try {
-    const category = await prisma.category.create({
+    // Use req.user.uid from your verifyAuth middleware as createdBy
+    const newCategory = await prisma.category.create({
       data: {
         name,
-        description,
-        createdBy: parseInt(facultyId), // or however your UID should be stored
+        image,
+        createdBy: req.user.uid,
       },
     });
-    res.status(201).json(category);
+    res.status(201).json(newCategory);
   } catch (error) {
     console.error("Error creating category:", error);
     res.status(500).json({ error: "Failed to create category" });

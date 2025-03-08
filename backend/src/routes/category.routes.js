@@ -10,7 +10,12 @@ const router = express.Router();
 // Protected route: Only authenticated users can access these endpoints
 router.get('/', verifyAuth, getCategories);
 router.post('/', verifyAuth, createCategory);
-router.post('/', verifyAuth, requireRole('faculty'), createCategory);
+router.post(
+    "/",
+    verifyAuth,
+    requireRole(["FACULTY", "ADMIN"]), // Adjust your middleware to accept multiple roles if needed
+    createCategory
+  );
 
 
 export default router;
